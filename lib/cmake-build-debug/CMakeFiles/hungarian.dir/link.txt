@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/hungarian.dir/main.cc.o CMakeFiles/hungarian.dir/hungarian.cc.o CMakeFiles/hungarian.dir/csv.cc.o  -o hungarian 
