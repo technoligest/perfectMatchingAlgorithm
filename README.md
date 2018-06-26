@@ -1,4 +1,4 @@
-#Hungarian Perfect Matching Algorithm
+# Hungarian Perfect Matching Algorithm
 
 
 Minimum distance perfect matching algorithm computes the optimal matching of pairs of points where the overall distance is minimized. It takes a matrix M as input where M[i][j] is the distance between thing<sub>i</sub> and thing<sub>j</sub>, and produces a vector of pairs that are the optimal solution.
@@ -20,7 +20,7 @@ Run with the following:
 ```
 
 
-###Test
+### Test
 
 For testing, I provide two files d1.csv and d2.csv
 
