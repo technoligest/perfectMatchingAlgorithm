@@ -44,6 +44,7 @@ int main(int argc, char **argv){
     cout << "Usage: ./hungarian <inputFile1> <inputFile2>" << endl;
     exit(1);
   }
+  //hungarian::LeftVertex v(20);
   std::ifstream file(argv[1]);
   cout << argv[1] << endl;
   const auto &m1 = hungarian::readCSVDataset(file);

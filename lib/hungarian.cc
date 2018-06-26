@@ -7,9 +7,38 @@
 #include "hungarian.h"
 #include "csv.h"
 
+namespace {
+
+bool RightVertex::isMatched() const{
+  return match_ != nullptr;
+}
+
+bool RightVertex::isExplored() const{
+  return isExplored_ || parent_ != nullptr;
+}
+
+void RightVertex::reset(){
+  isExplored_ = false;
+  parent_ = nullptr;
+  slack_ = std::numeric_limits<double>::max();
+  potentialParent_ = nullptr;
+}
+
+void LeftVertex::reset(){
+  isExplored_ = false;
+  parent_ = nullptr;
+}
+
+bool LeftVertex::isExplored() const{
+  return isExplored_ || parent_ != nullptr;
+}
+
+
+}
+
 namespace hungarian{
 
-namespace{
+
 //Validates that the matrix is good for processing
 void checkValidMatrix(const Matrix<double> &matrix){
   std::size_t n = matrix.size();
@@ -18,12 +47,10 @@ void checkValidMatrix(const Matrix<double> &matrix){
     assert(row.size() == n);
   }
 }
-}//namespace anonymous
 
 std::vector<std::pair<std::size_t, std::size_t>> minimumWeightPerfectMatching(const Matrix<double> &m){
   checkValidMatrix(m);
-  Hungarian h(m);
-  return h.solve();
+  return Hungarian(m).solve();
 }
 
 
@@ -154,29 +181,6 @@ void Hungarian::augmentMatching(RightVertex *tail) const{
 }
 
 
-bool RightVertex::isMatched() const{
-  return match_ != nullptr;
-}
-
-bool RightVertex::isExplored() const{
-  return isExplored_ || parent_ != nullptr;
-}
-
-void RightVertex::reset(){
-  isExplored_ = false;
-  parent_ = nullptr;
-  slack_ = std::numeric_limits<double>::max();
-  potentialParent_ = nullptr;
-}
-
-void LeftVertex::reset(){
-  isExplored_ = false;
-  parent_ = nullptr;
-}
-
-bool LeftVertex::isExplored() const{
-  return isExplored_ || parent_ != nullptr;
-}
 
 std::ostream &operator<<(std::ostream &out_stream, const std::vector<double> &instance){
   if(instance.empty()){

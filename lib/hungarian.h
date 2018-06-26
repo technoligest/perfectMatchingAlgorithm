@@ -11,13 +11,6 @@
 #include <cassert>
 
 
-namespace hungarian{
-
-//General use matrix that allows us to store anything in it.
-template<typename T>
-using Matrix = std::vector<std::vector<T>>;
-
-
 namespace{
 struct RightVertex;
 struct LeftVertex;
@@ -52,6 +45,14 @@ public:
   bool isExplored() const;
   void reset();
 };
+}//anonymous namespace
+
+namespace hungarian{
+
+//General use matrix that allows us to store anything in it.
+template<typename T>
+using Matrix = std::vector<std::vector<T>>;
+
 
 class Hungarian{
 private:
@@ -71,17 +72,14 @@ private:
 
 public:
   Hungarian(const Matrix<double> &matrix);
-
-
   std::vector<std::pair<std::size_t, std::size_t>> solve();
 };
-}
+
 
 
 std::ostream &operator<<(std::ostream &out_stream, const std::vector<double> &instance);
 std::ostream &operator<<(std::ostream &out_stream, const Matrix<double> &dataset);
 Matrix<double> readCSVDataset(std::istream &inputFile);
-
 
 //Driver method where given a matrix of weights, find the pairing
 std::vector<std::pair<std::size_t, std::size_t>> minimumWeightPerfectMatching(const Matrix<double> &m);
